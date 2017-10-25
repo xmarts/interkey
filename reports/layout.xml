@@ -1,0 +1,77 @@
+<odoo>
+
+
+        <record id="paperformat_reporteinterkey" model="report.paperformat">
+            <field name="name">No header</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+         <template id="extend_layout_inter">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="interkey.report_headerinter" />
+            <t t-raw="0" />
+
+            <t t-call="interkey.report_footeinter" />
+        </template>
+
+
+
+        <template id="report_headerinter">
+            <div class="header">
+            </div>
+        </template>
+
+
+        <template id="report_footeinter">
+            <div class="footer">
+               <div class="text-center" style="border-top: 1px solid black;">
+                   <!-- <ul class="list-inline">
+                        <li>Page:</li>
+                        <li><span class="page"/></li>
+                        <li>/</li>
+                        <li><span class="topage"/></li>
+                    </ul>-->    
+                    <strong style=" font-size:12pt; font-style:bold; font-weight: 900;">Página: </strong>
+                    <span class="page"/>
+                    <strong style=" font-size:12pt; font-style:bold; font-weight: 900;">/</strong>
+                    <span class="topage"/>                            
+                </div>
+            </div>
+        </template>
+
+    <template id="external_layout_ubication">
+    <!-- Multicompany -->
+    <t t-if="not o and doc">
+        <t t-set="o" t-value="doc"/>
+    </t>
+    <t t-if="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id"></t>
+    </t>
+    <t t-if="not o or not 'company_id' in o">
+        <t t-set="company" t-value="res_company"></t>
+    </t>
+
+    <t t-call="unicornio.report_headerdor" />
+    <t t-raw="0" />
+    <t t-call="report.external_layout_footer" />
+
+
+</template>
+
+
+       
+</odoo>
