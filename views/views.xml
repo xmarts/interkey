@@ -1,21 +1,15 @@
 <openerp>
   <data>
-   <!-- <record id="view_xmartspackstockpicking_form_inherit" model="ir.ui.view">
-            <field name="name">view.xmartspackstockpicking.form.add.text.field</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
+   <record id="view_accountinvoice_form_inherit" model="ir.ui.view">
+            <field name="name">view.accountinvoice.form.add.text.field</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
-              <xpath expr="//field[@name='origin']" position="after">
-                    <field name="xmpack" invisible="1"/>
+              <xpath expr="//notebook/page/field/tree/field[@name='price_unit']" position="after">
+                    <field name="costo" />
               </xpath>
-              <button name="do_new_transfer" states="draft,partially_available,assigned"  groups="stock.group_stock_user" type="object" class="oe_highlight" position="replace" >
-                    <button name="do_new_transfer" 
-                      string="Validate" groups="stock.group_stock_user" type="object" class="oe_highlight" attrs="{'invisible': ['|',('xmpack', '!=',True),('state', '=', 'done')]}"/>
-              </button>
-
-               
              </field>
-        </record>-->
+        </record>
    
 
   </data>
