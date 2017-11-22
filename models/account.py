@@ -10,13 +10,28 @@ _logger = logging.getLogger(__name__)
 class AccountInvoiceLIne(models.Model):
     _inherit ='account.invoice.line'
     costo= fields.Float(string='Costo')
+    utilidad = fields.Float(string='Utilidad')
+
+    @api.onchange('product_id')
+    def costoproduct_onchange(self):
+        self.costo=self.product_id.standard_price
     @api.model
     def create(self,vals):
-        producto = self.env['product.product'].search([('id','=',vals['product_id'])])
-        costo=producto.standard_price
+        #producto = self.env['product.product'].search([('id','=',vals['product_id'])])
+        costo= vals['costo']
         total=  vals['price_unit'] - costo
-        vals['costo']=total * vals['quantity']
+        vals['utilidad']=total * vals['quantity']
         return super(AccountInvoiceLIne,self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        if vals.get("costo") is not None:
+            costo = vals.get("costo")
+            precio =self.price_unit
+            qty=self.quantity
+            total = precio- costo
+            vals['utilidad'] = total * qty
+        return super(AccountInvoiceLIne, self).write(vals)
 class AccountInvoice(models.Model):
     _inherit='account.invoice'
     ganancy= fields.Float(string="ganancia", store=True, compute="_compute_ganancy")
@@ -25,7 +40,7 @@ class AccountInvoice(models.Model):
     def _compute_ganancy(self):
         total=0
         for i in self.invoice_line_ids:
-            total += i.costo
+            total += i.utilidad
         self.ganancy = total
 
 class AccountPayment(models.Model):
