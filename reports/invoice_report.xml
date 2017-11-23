@@ -473,12 +473,12 @@
                   </tr>
 
             </table>
-
+            <div style="text-align:justify;">
              Debo y pagare incondicionalmente a la orden de <span t-field="o.company_emitter_id.partner_id.name"/>. En esta ciudad de Guadalajara,Jalisco el dia
                 <span t-field="o.invoice_datetime"  t-field-options='{"format": "d/MM/y"}'/>. La cantidad de <span t-field="o.amount_total"/> valor de la mercancía descrita y reciba a mi entera satisfacción este
                 pagaré es mercantil y esta regido por la ley general de títulos y operaciones de crédito en su articulo 173 parte final y articulos correlativos por no ser pagaré
                 domiciliado, de no ser liquidado a su vencimiento causara 3% de interés mensual. En caso de cheque devuelto causara una penalizacion de $ 350.00 (trecientos cincuenta pesos 00/100 m.n) + iva mas un 4% de interes semanal, por incumplimiento de documentación expedida.
-
+            </div>
                 
 
                  <table style=" border:0px solid white; width:100%;" >
