@@ -47,7 +47,19 @@ class AccountInvoice(models.Model):
             bank = bank+ ' '+str(bk.acc_number)
         self.bank = bank
 
+    @api.one
+    def _compute_clabe(self):
+        bank_obj = self.env['res.partner.bank']
+        partner = self.company_emitter_id.partner_id
+        bank_ids = bank_obj.search([('partner_id', '=', partner.id)])
+        bank = ''
+        apa = True
+        for bk in bank_ids:
+            bank = bank + ' ' + str(bk.clabe)
+        self.clabe= bank
+
     bank = fields.Char(string="Banco",compute="_compute_bank")
+    clabe = fields.Char(string="Clabe", compute="_compute_clabe")
     @api.depends('invoice_line_ids')
     @api.one
     def _compute_ganancy(self):

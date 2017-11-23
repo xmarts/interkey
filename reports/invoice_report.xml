@@ -45,7 +45,7 @@
                               </tr>
                               <tr>
                                 <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:center;">
-                                    <span t-field="o.company_emitter_id.partner_id.township_sat_id.name"/>,
+                                <!-- <span t-field="o.company_emitter_id.partner_id.township_sat_id.name"/>,-->
                                     <span t-field="o.company_emitter_id.partner_id.state_id.name"/>,
                                     <span t-field="o.company_emitter_id.country_id.name"/>
                                 </td>
@@ -57,7 +57,7 @@
                               </tr>
                               <tr>
                                 <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:center;">
-                                    <span>Personas morales del régimen general</span>
+                                    <span t-field="o.company_emitter_id.partner_id.regimen_fiscal_id.name"/>
                                 </td>
                               </tr>
                               <tr>
@@ -72,7 +72,7 @@
                           <table style=" border:0px solid white; width:100%;" >
                               <tr>
                                   <td style="font-family:Arial, sans-serif;font-size:12pt; color:red; text-align:right;">
-                                      <b>Factura</b><b t-field="o.number"/>
+                                      <b>Factura </b><b t-field="o.number"/>
                                   </td>
                               </tr>
                               <tr>
@@ -85,32 +85,13 @@
                               <tr>
                                 <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:left;">
                                     <strong>Expedido en: </strong>
-                                    <span t-field="o.address_issued_id.name"/>
                                 </td>
                               </tr>
                               <tr>
+
                                 <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:left;">
-                                    <span t-field="o.address_issued_id.street"/>
-                                    <span t-if="o.address_issued_id.l10n_mx_street3"> No.Ext. <span t-field="o.address_issued_id.l10n_mx_street3"/></span>
-                                    <span t-if="o.address_issued_id.l10n_mx_street4"> No.Int. <span t-field="o.address_issued_id.l10n_mx_street4"/></span>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:left;">
-                                    <strong>Colonia</strong><span t-field="o.address_issued_id.colonia_sat_id.name"/>
                                     <span t-field="o.address_issued_id.zip_sat_id.code"/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:left;">
-                                    <strong>Localidad: </strong><span t-field="o.address_issued_id.locality_sat_id.name"/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:left;">
-                                    <span t-field="o.address_issued_id.township_sat_id.name"/>,
-                                    <span t-field="o.address_issued_id.state_id.name"/>,
-                                    <span t-field="o.address_issued_id.country_id.name"/>
+                                    <span t-field="o.address_issued_id.state_id.name"/>
                                 </td>
                               </tr>
                           </table>
@@ -159,19 +140,19 @@
                                                 <strong>Calle: </strong>
                                             </td>
                                             <td style="width:50%;border-bottom:1px solid black; height:10px; font-family:Arial, sans-serif;font-size:9pt; text-align:left; border-right:1px solid black;">
-                                                <span t-field="o.partner_id.parent_id.street"/>
+                                                <span t-field="o.partner_id.street"/>
                                             </td>
                                             <td style="width:10%; border-bottom:1px solid black;font-family:Arial, sans-serif;font-size:9pt; text-align:left; border-right:1px solid black;">
                                                 <strong>No. Ext: </strong>
                                             </td>
                                             <td style="width:10%;border-bottom:1px solid black; height:10px; font-family:Arial, sans-serif;font-size:9pt; text-align:left; border-right:1px solid black;">
-                                                <span t-field="o.partner_id.parent_id.l10n_mx_street3"/>
+                                                <span t-field="o.partner_id.l10n_mx_street3"/>
                                             </td>
                                             <td style="width:10%; border-bottom:1px solid black;font-family:Arial, sans-serif;font-size:9pt; text-align:left; border-right:1px solid black;">
                                                 <strong>No. Int: </strong>
                                             </td>
                                             <td style="width:10%; border-bottom:1px solid black;height:10px; font-family:Arial, sans-serif;font-size:9pt; text-align:left; border-right:1px solid black;">
-                                                <span t-field="o.partner_id.parent_id.l10n_mx_street4"/>
+                                                <span t-field="o.partner_id.l10n_mx_street4"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -205,7 +186,7 @@
                                                 <strong>Lugar: </strong>
                                             </td>
                                             <td style="width:90%; height:10px; font-family:Arial, sans-serif;font-size:9pt; text-align:left; border-right:1px solid black;">
-                                                 <span t-field="o.partner_id.township_sat_id.name"/>,
+                                                 <span t-field="o.partner_id.township_sat_id.name"/>
                                                  <span t-field="o.partner_id.state_id.name"/>,
                                                  <span t-field="o.partner_id.country_id.name"/>
                                             </td>
@@ -255,15 +236,9 @@
                             <tr>
                                 <td style=""></td>
                             </tr>
+
                               <tr>
-                                <td style="font-family:Arial, sans-serif;font-size:9pt; text-align:center;">
-                                    <span t-field="o.partner_id.township_sat_id.name"/> ,
-                                    <span t-field="o.partner_id.state_id.name"/>
-                                    <span t-field="o.partner_id.country_id.name"/>
-                                </td>
-                            </tr>
-                              <tr>
-                                <td style="font-family:Arial, sans-serif;font-size:9pt; text-align:center;">a  <span t-field="o.invoice_datetime"/> Serie: FAC</td>
+                                <td style="font-family:Arial, sans-serif;font-size:9pt; text-align:center;"> <span t-field="o.invoice_datetime"/> Serie: FAC</td>
                             </tr>
                               <tr>
                                 <td style="font-family:Arial, sans-serif;font-size:9pt; text-align:center;">
@@ -301,7 +276,7 @@
                             <span t-raw="'%s &lt;br&gt;' % l.product_id and l.product_id.sat_product_id.code or ''"/>
                         </td>
                         <td class="text-right"><span t-field="l.quantity"/></td>
-                        <td style="text-align:center;"><span t-field="l.uom_id"/></td>
+                        <td style="text-align:center;">[<span t-field="l.uom_id.sat_uom_id.code"/>] <span t-field="l.uom_id.sat_uom_id.name"/></td>
                         <td><!--<span t-field="l.name"/>-->
                             <span t-raw="'%s &lt;br&gt;' % l.name if l.name.find('] ') &lt; 0 else l.name[l.name.find('] ')+2:]"/>
                         </td>
@@ -356,7 +331,7 @@
                   </tr>
                  <tr>
                       <td style="width:33%;font-family:Arial, sans-serif;font-size:9pt; font-style:italic; text-align:right;">
-                            CLIENTE PASA POR EL PEDIDO
+                           <span t-field="o.comment"/>
                       </td>
                       <td style="width:33%;font-family:Arial, sans-serif;font-size:9pt;font-style:italic;  text-align:center;">
                       </td>
@@ -367,7 +342,7 @@
                  <tr>
                       <td style="width:50%;font-family:Arial, sans-serif;font-size:9pt; font-style:italic; ">
                            "Este documento es una representación impresa de una CFDI"<br/>
-                          CFDI, Comprobante Fiscal Digital por Internet
+                         <b>CFDI Versión 3.3</b>, Comprobante Fiscal Digital por Internet
                       </td>
                       <td style="width:50%;font-family:Arial, sans-serif;font-size:9pt;font-style:italic;  ">
                           <br/>Datos bancarios <span t-field="o.company_emitter_id.partner_id.name"/>
@@ -389,14 +364,12 @@
                           /<span t-field="o.currency_id.name"/>
                       </td>
                         <td style="width:25%; border-right:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center;">
-                            <span t-raw="'%s &lt;br&gt;' % o.acc_payment and o.acc_payment.last_acc_number or 'N/A'"/>
+                           <span t-field="o.bank"/>
 
                         </td>
-                        <td style="width:25%; border-right:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center;"><span t-field="o.bank"/></td>
+                        <td style="width:25%; border-right:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center;"><span t-field="o.clabe"/></td>
                         <td style="width:25%; border-right:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center;">
-                            <div name="reference" t-if="o.reference">
-                            <span t-field="o.reference"/>
-                        </div>
+                            <span t-field="o.number"/>
                         </td>
                   </tr>
                 </table>
@@ -418,11 +391,25 @@
                       </td>
                       <td style="width:33%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray">
                             <b>Método de pago</b><br/>
+                          [<span t-field="o.metodo_pago_id.code"/>] <span t-field="o.metodo_pago_id.name"/>
+                         </td>
+                      <td style="width:34%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray">
+                            <b> Últimos 4 digitos de la cuenta bancaria</b><br/><span t-raw="'%s &lt;br&gt;' % o.acc_payment and o.acc_payment.last_acc_number or 'N/A'"/>
+                      </td>
+                  </tr>
+                     <tr>
+                      <td style="width:33%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray;">
+                            <b>Tipo de Comprobante</b><br/>
+                        [<span t-field="o.type_document_id.code"/>]  <span t-field="o.type_document_id.name"/>
+                      </td>
+                      <td style="width:33%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray">
+                            <b>Forma de pago</b><br/>
                           <span t-raw="'%s &lt;br&gt;' % o.pay_method_ids and ','.join([x.code for x in o.pay_method_ids]) or o.pay_method_id.code or '99'"/>
                           <BR/><span t-raw="'%s &lt;br&gt;' % o.pay_method_ids and ','.join([x.name for x in o.pay_method_ids]) or 'Otros'"/>
                       </td>
                       <td style="width:34%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray">
-                            <b> Últimos 4 digitos de la cuenta bancaria</b><br/><span t-raw="'%s &lt;br&gt;' % o.acc_payment and o.acc_payment.last_acc_number or 'N/A'"/>
+                            <b>Uso  CFDI</b><br/>
+                           [<span t-field="o.uso_cfdi_id.code"/>]  <span t-field="o.uso_cfdi_id.name"/>
                       </td>
                   </tr>
 
@@ -488,7 +475,7 @@
              Debo y pagare incondicionalmente a la orden de <span t-field="o.company_emitter_id.partner_id.name"/>. En esta ciudad de Guadalajara,Jalisco el dia
                 <span t-field="o.invoice_datetime"  t-field-options='{"format": "d/MM/y"}'/>. La cantidad de <span t-field="o.amount_total"/> valor de la mercancía descrita y reciba a mi entera satisfacción este
                 pagaré es mercantil y esta regido por la ley general de títulos y operaciones de crédito en su articulo 173 parte final y articulos correlativos por no ser pagaré
-                domiciliado, de no ser liquidado a su vencimiento causara 3% de interés mensual. En caso de cheque devuelto causara una penalizacion de $ 350.00 (trecientos cincuenta pesos 00/100 m.n) + iva mas un 4% de interes seminal, por incumplimiento de documentación expedida.
+                domiciliado, de no ser liquidado a su vencimiento causara 3% de interés mensual. En caso de cheque devuelto causara una penalizacion de $ 350.00 (trecientos cincuenta pesos 00/100 m.n) + iva mas un 4% de interes semanal, por incumplimiento de documentación expedida.
 
                 
 
