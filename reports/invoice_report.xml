@@ -57,7 +57,7 @@
                               </tr>
                               <tr>
                                 <td style="font-family:Arial, sans-serif;font-size:10pt; color:#4B0082; text-align:center;">
-                                   [<span t-field="o.company_emitter_id.partner_id.regimen_fiscal_id.code"/>] <span t-field="o.company_emitter_id.partner_id.regimen_fiscal_id.name"/>
+                                   <b> Régimen Fiscal: </b> [<span t-field="o.company_emitter_id.partner_id.regimen_fiscal_id.code"/>] <span t-field="o.company_emitter_id.partner_id.regimen_fiscal_id.name"/>
                                 </td>
                               </tr>
                               <tr>
