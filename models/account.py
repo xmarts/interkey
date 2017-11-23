@@ -18,9 +18,15 @@ class AccountInvoiceLIne(models.Model):
     @api.model
     def create(self,vals):
         #producto = self.env['product.product'].search([('id','=',vals['product_id'])])
-        costo= vals['costo']
-        total=  vals['price_unit'] - costo
-        vals['utilidad']=total * vals['quantity']
+        if 'costo' in vals:
+            costo= vals['costo']
+            total=  vals['price_unit'] - costo
+            vals['utilidad']=total * vals['quantity']
+        else:
+            producto = self.env['product.product'].search([('id', '=', vals['product_id'])])
+            costo = producto.standard_price
+            total = vals['price_unit'] - costo
+            vals['utilidad'] = total * vals['quantity']
         return super(AccountInvoiceLIne,self).create(vals)
 
     @api.multi
