@@ -25,7 +25,7 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'reports/layout.xml',
-       # 'reports/invoice_report.xml',
+        'reports/invoice_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

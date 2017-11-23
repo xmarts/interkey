@@ -35,6 +35,19 @@ class AccountInvoiceLIne(models.Model):
 class AccountInvoice(models.Model):
     _inherit='account.invoice'
     ganancy= fields.Float(string="ganancia", store=True, compute="_compute_ganancy")
+
+    @api.one
+    def _compute_bank(self):
+        bank_obj = self.env['res.partner.bank']
+        partner=self.company_emitter_id.partner_id
+        bank_ids = bank_obj.search([('partner_id', '=', partner.id)])
+        bank =''
+        apa = True
+        for bk in bank_ids:
+            bank = bank+ ' '+str(bk.acc_number)
+        self.bank = bank
+
+    bank = fields.Char(string="Banco",compute="_compute_bank")
     @api.depends('invoice_line_ids')
     @api.one
     def _compute_ganancy(self):
