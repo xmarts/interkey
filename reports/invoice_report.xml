@@ -333,7 +333,7 @@
                   </tr>
                  <tr>
                       <td style="width:33%;font-family:Arial, sans-serif;font-size:9pt; font-style:italic; text-align:right;">
-                           <span t-field="o.comment"/>
+
                       </td>
                       <td style="width:33%;font-family:Arial, sans-serif;font-size:9pt;font-style:italic;  text-align:center;">
                       </td>
@@ -454,9 +454,10 @@
                               </tr>
 
                         </table>
+                      <br/>
                       </td>
-                      <td style="width:30%;font-family:Arial, sans-serif;font-size:97t; text-align:center;">
-                        <img t-if="o.cfdi_cbb" t-att-src="'data:image/png;base64,%s' % o.cfdi_cbb" style="width:5cm;height:5cm;"/>
+                      <td rowspan="3" style="width:30%;font-family:Arial, sans-serif;font-size:97t; text-align:center;">
+                        <img t-if="o.cfdi_cbb" t-att-src="'data:image/png;base64,%s' % o.cfdi_cbb" style="width:4cm;height:4cm;"/>
                       </td>
                   </tr>
 
