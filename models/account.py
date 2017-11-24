@@ -54,6 +54,17 @@ class AccountInvoice(models.Model):
         self.bank = bank
 
     @api.one
+    def _compute_banks(self):
+        bank_obj = self.env['res.partner.bank']
+        partner = self.company_emitter_id.partner_id
+        bank_ids = bank_obj.search([('partner_id', '=', partner.id)])
+        bank = ''
+        apa = True
+        for bk in bank_ids:
+            bank = bank + ' ' + str(bk.bank_id.name)
+        self.banco = bank
+
+    @api.one
     def _compute_clabe(self):
         bank_obj = self.env['res.partner.bank']
         partner = self.company_emitter_id.partner_id
@@ -64,7 +75,8 @@ class AccountInvoice(models.Model):
             bank = bank + ' ' + str(bk.clabe)
         self.clabe= bank
 
-    bank = fields.Char(string="Banco",compute="_compute_bank")
+    bank = fields.Char(string="Banco clave interbancaria",compute="_compute_bank")
+    banco =fields.Char(string="Banco",compute="_compute_banks")
     clabe = fields.Char(string="Clabe", compute="_compute_clabe")
     @api.depends('invoice_line_ids')
     @api.one

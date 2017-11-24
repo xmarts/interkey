@@ -363,7 +363,7 @@
                   </tr>
                     <tr>
                       <td style="width:25%;font-family:Arial, border-left:1px solid gray; sans-serif; border-right:1px solid gray;font-size:9pt; text-align:center;">
-                          /<span t-field="o.currency_id.name"/>
+                        <span t-field="o.banco"/> /<span t-field="o.currency_id.name"/>
                       </td>
                         <td style="width:25%; border-right:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center;">
                            <span t-field="o.bank"/>
@@ -389,7 +389,7 @@
                   </tr>
                      <tr>
                       <td style="width:33%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray;">
-                            <b>Certificado del Emisor</b><br/><span t-field="o.no_certificado"/>
+                            <b>Certificado del Emisor</b><br/><span t-field="o.cfdi_no_certificado"/>
                       </td>
                       <td style="width:33%;border-top:1px solid gray;font-family:Arial, sans-serif;font-size:9pt; text-align:center; border-right:1px solid gray">
                             <b>Método de pago</b><br/>

@@ -9,6 +9,7 @@
                     <field name="costo" />
               </xpath>
                 <xpath expr="//notebook/page[@name='other_info']/group/group/field[@name='fiscal_position_id']" position="after">
+                    <field name="banco" />
                     <field name="bank" />
                     <field name="clabe" />
               </xpath>
