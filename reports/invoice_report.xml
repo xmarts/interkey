@@ -420,7 +420,7 @@
 
             <table style=" border:1px solid gray; width:100%;" >
                   <tr>
-                      <td style="width:70%;font-family:Arial, sans-serif;font-size:7pt; text-align:center;">
+                      <td style="width:70%;font-family:Arial, sans-serif;font-size:7pt; text-align:center;border-bottom:1px solid gray;">
                           <table style=" border:0px solid white; width:100%;" >
                               <tr>
                                   <td style="width:100%;font-family:Arial, sans-serif;font-size:7pt; ">
@@ -456,7 +456,7 @@
                         </table>
                       <br/>
                       </td>
-                      <td rowspan="3" style="width:30%;font-family:Arial, sans-serif;font-size:97t; text-align:center;">
+                      <td rowspan="3" style="width:30%;font-family:Arial, sans-serif; ">
                         <img t-if="o.cfdi_cbb" t-att-src="'data:image/png;base64,%s' % o.cfdi_cbb" style="width:4cm;height:4cm;"/>
                       </td>
                   </tr>
