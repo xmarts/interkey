@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
               <xpath expr="//notebook/page/field/tree/field[@name='price_unit']" position="after">
-                    <field name="costo" />
+                    <field name="costo"  groups="account.group_account_manager"/>
               </xpath>
                 <xpath expr="//notebook/page[@name='other_info']/group/group/field[@name='fiscal_position_id']" position="after">
                     <field name="banco" />

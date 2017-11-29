@@ -454,7 +454,7 @@
                               </tr>
 
                         </table>
-                      <br/>
+                      <br/><br/><br/>
                       </td>
                       <td rowspan="3" style="width:30%;font-family:Arial, sans-serif; ">
                         <img t-if="o.cfdi_cbb" t-att-src="'data:image/png;base64,%s' % o.cfdi_cbb" style="width:4cm;height:4cm;"/>

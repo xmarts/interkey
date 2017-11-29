@@ -86,6 +86,10 @@ class AccountInvoice(models.Model):
             total += i.utilidad
         self.ganancy = total
 
+    invoice_line_ids = fields.One2many('account.invoice.line', 'invoice_id', string='Invoice Lines',
+                                       oldname='invoice_line',
+                                       readonly=True, states={'draft': [('readonly', False)],'open': [('readonly', False)]}, copy=True)
+
 class AccountPayment(models.Model):
     _inherit ='account.payment'
     @api.multi
