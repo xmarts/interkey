@@ -2,9 +2,38 @@
 
 from openerp import models, fields, api, _, tools
 from openerp.exceptions import UserError, RedirectWarning, ValidationError
-import xlrd
 import shutil
 import logging
+from xml.dom.minidom import parseString
+import time
+import codecs
+from xml.dom import minidom
+from datetime import datetime, timedelta
+from qrtools import QR
+
+import os
+import sys
+import time
+import tempfile
+import base64
+import binascii
+
+import json
+import requests
+from requests_toolbelt import MultipartEncoder
+
+"""
+class LogPlugin(MessagePlugin):
+    def sending(self, context):
+        print(str(context.envelope))
+    def received(self, context):
+        print(str(context.reply))
+"""
+auth_production_url  = 'https://services.sw.com.mx/security/authenticate'
+auth_testing_url     = 'http://services.test.sw.com.mx/security/authenticate'
+
+production_url      = 'https://services.sw.com.mx/cfdi33/stamp/v4'
+testing_url         = 'http://services.test.sw.com.mx/cfdi33/stamp/v4'
 _logger = logging.getLogger(__name__)
 
 class AccountInvoiceLIne(models.Model):
@@ -26,6 +55,7 @@ class AccountInvoiceLIne(models.Model):
             producto = self.env['product.product'].search([('id', '=', vals['product_id'])])
             costo = producto.standard_price
             total = vals['price_unit'] - costo
+            vals['costo'] = costo
             vals['utilidad'] = total * vals['quantity']
         return super(AccountInvoiceLIne,self).create(vals)
 
@@ -41,6 +71,53 @@ class AccountInvoiceLIne(models.Model):
 class AccountInvoice(models.Model):
     _inherit='account.invoice'
     ganancy= fields.Float(string="ganancia", store=True, compute="_compute_ganancy")
+
+    @api.one
+    def generate(self):
+        if self.state !='draft':
+            valor =self.create_qr_image(self.amount_total)
+            self.write({'cfdi_cbb': valor})
+    def create_qr_image(self, amount_total):
+        url = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx"
+        UUID = self.cfdi_folio_fiscal
+
+        qr_emisor = self.partner_id.vat_split
+        qr_receptor = self.company_id.vat_split
+        total = "%.6f" % (amount_total or 0.0)
+        total_qr = ""
+        qr_total_split = total.split('.')
+        decimales = qr_total_split[1]
+        index_zero = self.return_index_floats(decimales)
+        decimales_res = decimales[0:index_zero + 1]
+        if decimales_res == '0':
+            total_qr = qr_total_split[0]
+        else:
+            total_qr = qr_total_split[0] + "." + decimales_res
+
+        last_8_digits_sello = ""
+
+
+        cfdi_sello = self.cfdi_sello
+
+        last_8_digits_sello = cfdi_sello[len(cfdi_sello) - 8:]
+
+        qr_string = '%s&id=%s&re=%s&rr=%s&tt=%s&fe=%s' % (
+        url, UUID, qr_emisor, qr_receptor, total_qr, last_8_digits_sello)
+
+        qr_code = QR(data=qr_string.encode('utf-8'))
+        try:
+            qr_code.encode()
+        except Exception, e:
+            raise UserError(_('Advertencia !!!\nNo se pudo crear el Código Bidimensional. Error %s') % e)
+        if qr_code.filename is None:
+            pass
+        else:
+            qr_file = open(qr_code.filename, "rb")
+            temp_bytes = qr_file.read()
+            qr_bytes = base64.encodestring(temp_bytes)
+            qr_file.close()
+
+        return qr_bytes or False
 
     @api.one
     def _compute_bank(self):

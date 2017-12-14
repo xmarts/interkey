@@ -13,6 +13,9 @@
                     <field name="bank" />
                     <field name="clabe" />
               </xpath>
+                <xpath expr="//header/field[@name='state']" position="before">
+                    <button name="generate" string="Generar codigo bidemensional" type="object" attrs="{'invisible': [('cfdi_cbb', '!=', False)]}" />
+              </xpath>
              </field>
         </record>
        <record id="view_company_form_inherit" model="ir.ui.view">
@@ -25,6 +28,18 @@
               </xpath>
              </field>
         </record>
+       <!--<record id="view_accountinvoicelionmx_for>>m_inherit" model="ir.ui.view">
+            <field name="name">view.accountinvoicelionmx.form.add.text.field</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="l10n_mx_einvoice.account_invoice_form_l10n_mx_einvoice"/>
+            <field name="arch" type="xml">
+              <xpath expr="//notebook/page/group/field[@name='cfdi_cbb']" position="after">
+                    <button name="generate" string="Generar idemensional" type="object"  />
+              </xpath>
+
+             </field>
+        </record>-->
+
    
 
   </data>
