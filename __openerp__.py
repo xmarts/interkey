@@ -24,8 +24,10 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
+        'views/templates.xml',
         'reports/layout.xml',
         'reports/invoice_report.xml',
+        'reports/report_salecommission.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

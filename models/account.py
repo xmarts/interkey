@@ -190,3 +190,52 @@ class AccountPayment(models.Model):
                 amount_manager = (invoice.ganancy * payment.sales_team_id.sales_manager_commission)/100
                 amount_person =  (invoice.ganancy * payment.sales_team_id.sales_person_commission)/100
         return amount_person, amount_manager
+
+    @api.multi
+    def create_commission(self, amount, commission, type):
+        commission_obj = self.env['sales.commission.line']
+        product = self.env['product.product'].search([('is_commission_product', '=', 1)], limit=1)
+        for payment in self:
+            if payment.invoice_ids:
+                for invoice in payment.invoice_ids:
+                    # Salesperson
+                    if amount != 0.0:
+                        commission_value = {
+                            # 'sales_team_id': invoice.team_id.id,
+                            # 'commission_user_id': invoice.user_id.id,
+                            'amount': amount,
+                            'origin': payment.name,
+                            'type': type,
+                            'product_id': product.id,
+                            'date': payment.payment_date,
+                            'src_payment_id': payment.id,
+                            'src_invoice_id': invoice.id,
+                            'invoice_id': invoice.id,
+                            'sales_commission_id': commission.id,
+                        }
+                        commission_id = commission_obj.create(commission_value)
+                        if type == 'sales_person':
+                            payment.commission_person_id = commission_id.id
+                        if type == 'sales_manager':
+                            payment.commission_manager_id = commission_id.id
+            else:
+                if amount != 0.0:
+                    commission_value = {
+                        # 'sales_team_id': payment.team_id.id,
+                        # 'commission_user_id': payment.user_id.id,
+                        'amount': amount,
+                        'origin': payment.name,
+                        'src_invoice_id': invoice.id,
+                        'type': type,
+                        'product_id': product.id,
+                        'date': payment.payment_date,
+                        'src_payment_id': payment.id,
+                        'sales_commission_id': commission.id,
+                    }
+                    commission_id = commission_obj.create(commission_value)
+                    if type == 'sales_person':
+                        payment.commission_person_id = commission_id.id
+                    if type == 'sales_manager':
+                        payment.commission_manager_id = commission_id.id
+
+        return True

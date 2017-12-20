@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <template id="sales_commission_calculation.sales_commission_worksheet_id">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="report.internal_layout">
+                         <div class="page">
+                             <div>
+                                 <h3><strong>
+                                      <p align="center">Detalles de Ventas de Comisiones</p>
+                                     <span t-field="doc.name"/> - <span t-field="doc.state"/></strong>
+                                 </h3>
+                             </div>
+                             <table class="table table-responsive">
+                                 <tr>
+                                     <td><strong>Comercial</strong></td><td><span t-field="doc.commission_user_id.name"/></td>
+                                     <td><strong>Producto</strong></td><td><span t-field="doc.product_id.name"/></td>
+                                 </tr>
+                                 <tr>
+                                     <td><strong>Fecha inicio</strong></td><td><span t-field="doc.start_date"/></td>
+                                     <td><strong>Fecha fin</strong></td><td><span t-field="doc.end_date"/></td>
+                                 </tr>
+                                 <tr>
+                                    <td><strong>Total</strong></td><td><span t-field="doc.amount" t-options='{"widget": "monetary", "display_currency": doc.company_id.currency_id}'/></td>
+                                    <td><strong>Compañia</strong></td><td><span t-field="doc.company_id.name"/></td>
+                                 </tr>
+                                 <tr>
+                                     <td><strong>Factura</strong></td><td><span t-field="doc.invoice_id"/></td>
+                                     <td><strong>Estado</strong></td><td><span t-field="doc.state"/></td>
+                                 </tr>
+                             </table>
+                             <h3>
+                             	<strong><p>Lineas de Comisiones de Ventas</p></strong>
+                             	<table class="table table-responsive">
+                                <tr>
+                                    <td><strong>Fecha</strong></td>
+                                    <td><strong>Tipo Usuario</strong></td>
+                                    <td><strong>Monto</strong></td>
+                                    <td><strong>Factura</strong></td>
+                                    <td><strong>Estatus</strong></td>
+                                    <td><strong>Pagada</strong></td>
+                                </tr>
+                                <t t-foreach="doc.sales_commission_line" t-as="line">
+                                    <tr>
+                                        <td><span t-field="line.date"/></td>
+                                        <td><span t-field="line.type"/></td>
+                                        <td><span t-field="line.amount" t-options='{"widget": "monetary", "display_currency": line.source_currency}'/></td>
+                                        <td><span t-field="line.invoice_id" /></td>
+                                        <td><span t-field="line.state"/></td>
+                                        <td><span t-field="line.is_paid"/></td>
+                                    </tr>
+                                </t>
+                             </table>
+                             </h3>
+
+                        </div>
+                </t>
+               </t>
+        </template>
+
+    </data>
+</openerp>

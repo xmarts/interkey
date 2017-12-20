@@ -1,22 +1,18 @@
 <openerp>
     <data>
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
+       <record id="view_commissionsaleline_form_inherit" model="ir.ui.view">
+            <field name="name">view.commissionsaleline.form.add.text.field</field>
+            <field name="model">sales.commission</field>
+            <field name="inherit_id" ref="sales_commission_calculation.sales_commission_worksheet_form_view"/>
+            <field name="arch" type="xml">
+              <xpath expr="//notebook/page/group/field/tree/field[@name='state']" position="after">
+                    <field name="invoice_id"/>
+              </xpath>
+                <xpath expr="//header/button[@name='action_draft']" position="after">
+                    <button string="Pagado" type="object" name="action_paid" states="draft"/>
+              </xpath>
+
+             </field>
+        </record>
     </data>
 </openerp>
