@@ -26,7 +26,7 @@
         'views/views.xml',
         'views/templates.xml',
         'reports/layout.xml',
-        'reports/invoice_report.xml',
+        #'reports/invoice_report.xml',
         'reports/report_salecommission.xml',
     ],
     # only loaded in demonstration mode
