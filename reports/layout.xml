@@ -1,6 +1,4 @@
 <odoo>
-
-
         <record id="paperformat_reporteinterkey" model="report.paperformat">
             <field name="name">No header</field>
             <field name="default" eval="True"/>

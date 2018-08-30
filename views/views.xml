@@ -28,6 +28,7 @@
               </xpath>
              </field>
         </record>
+        
        <!--<record id="view_accountinvoicelionmx_for>>m_inherit" model="ir.ui.view">
             <field name="name">view.accountinvoicelionmx.form.add.text.field</field>
             <field name="model">account.invoice</field>
@@ -40,7 +41,18 @@
              </field>
         </record>-->
 
-   
+        
+      <record id="inherit_res_partner" model="ir.ui.view">
+            <field name="name">inherit_res_partner</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                  <xpath expr="//field[@name='street2']" position="after">
+                        <field name="zone" placeholder="Zona"/>
+                  </xpath>
+            </field>
+      </record>
 
   </data>
 </openerp>
